@@ -2,35 +2,52 @@ import React, { useState } from 'react'
 import ProductList from './components/ProductList'
 import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
+import './App.css' 
 
 const App = () => {
-  // TODO: Implement state for dark mode toggle
+  // State for dark mode toggle
+  const [darkMode, setDarkMode] = useState(false)
 
-  // TODO: Implement state for cart management
+  // State for cart management
+  const [cart, setCart] = useState([])
 
-  // TODO: Implement state for category filtering
+  // State for category filtering
+  const [category, setCategory] = useState('all')
+
+  // Function to add items to cart
+  const addToCart = (product) => {
+  console.log('Adding to cart:', product); // Add this for debugging
+  setCart([...cart, product]);
+}
+
+  // Function to handle category change
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value)
+  }
 
   return (
-    <div>
-      <h1>🛒 Shopping App</h1>
+    <div className={darkMode ? 'app-dark' : 'app-light'}>
+      <h1>Talia's Shopping App</h1>
       <p>
-        Welcome! Your task is to implement filtering, cart management, and dark
-        mode.
+        Welcome to our grocery store. Enjoy shopping!
       </p>
 
-      {/* TODO: Render DarkModeToggle and implement dark mode functionality */}
+      {/* Render DarkModeToggle with dark mode functionality */}
+      <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      {/* TODO: Implement category filter dropdown */}
+      {/* Category filter dropdown with onChange event */}
       <label>Filter by Category: </label>
-      <select>
+      <select value={category} onChange={handleCategoryChange}>
         <option value="all">All</option>
         <option value="Fruits">Fruits</option>
         <option value="Dairy">Dairy</option>
+        <option value="Vegetables">Vegetables</option>
       </select>
 
-      <ProductList />
+      <ProductList category={category} addToCart={addToCart} />
 
-      {/* TODO: Implement and render Cart component */}
+      {/* Render Cart component with cart state */}
+      <Cart cart={cart} />
     </div>
   )
 }
