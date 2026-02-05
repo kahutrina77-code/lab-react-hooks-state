@@ -9,13 +9,12 @@ const Cart = ({ cart }) => {
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index}>
-              {item.name} is in your cart.
-            </li>
-          ))}
-        </ul>
+        // In Cart.jsx (Corrected for the test)
+<ul>
+  {cart.map((item, index) => (
+    <li key={index}>{item.name} is in your cart.</li>
+  ))}
+</ul>
       )}
     </div>
   )
